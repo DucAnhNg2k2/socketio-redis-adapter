@@ -15,14 +15,12 @@ async function startServer2() {
   io.on("connection", (socket) => {
     console.log("A user connected");
     console.log(`Socket ID: ${socket.id}`);
+    socket.join("room:ducanh2305");
 
     socket.on("newmessage", (data) => {
       console.log("Message received:", data);
     });
   });
-
-  const allSocket = await io.in("room:ducanh2305").fetchSockets();
-  console.log('All sockets in room "room:ducanh2305":', allSocket);
 
   io.listen(3001);
   console.log("Server is running on port 3001");
@@ -32,5 +30,10 @@ async function startServer2() {
       text: "Hello, room!",
     });
   }, 10000);
+
+  setTimeout(async () => {
+    const allSocket = await io.in("room:ducanh2305").fetchSockets(); // Socket, RemoteSocket
+    console.log('All sockets in room "room:ducanh2305":', allSocket);
+  }, 5000);
 }
 startServer2();

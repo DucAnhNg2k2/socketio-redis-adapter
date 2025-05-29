@@ -1,6 +1,6 @@
 const { io } = require("socket.io-client");
 
-const socket = io("http://localhost:3000");
+const socket = io("http://localhost:3001");
 
 socket.on("connect", () => {
   console.log("Connected to server");
@@ -12,7 +12,7 @@ socket.on("newmessage", (data) => {
 });
 
 setTimeout(() => {
-    const message = { text: "Hello, server! I'm client1 " };
+    const message = { text: "Hello, server! I'm client2" };
     console.log("Sending message:", message);
     socket.emit("newmessage", message);
 }, 2000);
